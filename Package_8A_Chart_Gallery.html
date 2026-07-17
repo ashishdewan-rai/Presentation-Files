@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Contract Package 8A — Progress, 10 Ways</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+  :root{
+    --bg:#0B141D; --panel:#111E29; --panel-2:#0E1922; --grid:#1C2C39; --line:#2C4051;
+    --text:#E9F0F5; --muted:#7E93A3; --amber:#F2A93B; --teal:#5BC9AF; --red:#E1655A; --blue:#5B8FE1;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      linear-gradient(var(--grid) 1px, transparent 1px) 0 0/40px 40px,
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0/40px 40px,
+      var(--bg);
+    color:var(--text); font-family:'IBM Plex Sans', sans-serif; padding:28px 20px 50px;
+  }
+  .wrap{max-width:1180px; margin:0 auto;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.18em;
+    text-transform:uppercase; color:var(--amber); margin-bottom:8px; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:"◆"; font-size:9px;}
+  h1{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:clamp(26px,4vw,38px); margin:0 0 6px; letter-spacing:-.01em;}
+  p.sub{color:var(--muted); max-width:680px; font-size:14px; line-height:1.55; margin:0 0 30px;}
+  .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  @media(max-width:980px){.grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:640px){.grid{grid-template-columns:1fr;}}
+  .card{
+    background:var(--panel); border:1px solid var(--line); border-radius:4px;
+    padding:16px 16px 14px; position:relative; display:flex; flex-direction:column;
+  }
+  .card::before, .card::after{content:""; position:absolute; width:8px; height:8px; border:1.5px solid var(--amber); opacity:.5;}
+  .card::before{top:-1px; left:-1px; border-right:none; border-bottom:none;}
+  .card::after{bottom:-1px; right:-1px; border-left:none; border-top:none;}
+  .tag{font-family:'IBM Plex Mono',monospace; font-size:9.5px; color:var(--amber); letter-spacing:.08em; text-transform:uppercase;}
+  .ctitle{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; margin:3px 0 2px;}
+  .cnote{color:var(--muted); font-size:11.5px; line-height:1.4; margin:0 0 10px;}
+  .chartbox{flex:1; position:relative; min-height:180px;}
+  .full{grid-column:1/-1;}
+
+  .gaugewrap{position:relative; display:flex; align-items:center; justify-content:center; height:170px;}
+  .gaugenum{position:absolute; bottom:14px; text-align:center; width:100%;}
+  .gaugenum b{font-family:'Space Grotesk',sans-serif; font-size:30px; color:var(--amber);}
+  .gaugenum span{display:block; font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--muted); letter-spacing:.05em;}
+
+  .ruler{position:relative; height:26px; border-radius:2px; margin-top:auto;
+    background:repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 10%);
+    background-color:var(--panel-2); border:1px solid var(--line); overflow:hidden;}
+  .ruler .fo{position:absolute; top:0; bottom:0; left:0; background:rgba(91,143,225,.35);}
+  .ruler .fc{position:absolute; top:0; bottom:0; left:0; background:linear-gradient(90deg,#5BC9AF,#F2A93B); opacity:.9;}
+  .ruler .mk{position:absolute; top:-1px; bottom:-1px; width:2px; background:var(--text);}
+  .rulerlabels{display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--muted); margin-top:6px;}
+
+  .stackbar{height:30px; border-radius:2px; overflow:hidden; display:flex; border:1px solid var(--line); margin-top:auto;}
+  .stackbar div{height:100%;}
+  .stacklegend{display:flex; gap:14px; margin-top:8px; flex-wrap:wrap;}
+  .stacklegend span{font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--muted); display:flex; align-items:center; gap:5px;}
+  .sw{width:9px;height:9px;border-radius:2px;display:inline-block;}
+
+  footer{margin-top:30px; padding-top:16px; border-top:1px solid var(--line); color:var(--muted);
+    font-size:11px; font-family:'IBM Plex Mono',monospace; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">FY 2082/83 &nbsp;·&nbsp; CHART GALLERY &nbsp;·&nbsp; 10 WAYS TO SHOW ONE PACKAGE</div>
+  <h1>Contract Package 8A</h1>
+  <p class="sub">Same underlying numbers for Contract Package 8A — opening balance 3.3%, twelve monthly entries, closing at 10.7% — rendered as ten different chart types so you can pick whichever reads best in your appraisal deck.</p>
+
+  <div class="grid">
+
+    <div class="card">
+      <div class="tag">01 · Line</div>
+      <div class="ctitle">Cumulative progress trend</div>
+      <p class="cnote">Running total across the year — best for showing acceleration or slow-down.</p>
+      <div class="chartbox"><canvas id="c1"></canvas></div>
+    </div>
+
+    <div class="card">
+      <div class="tag">02 · Bar</div>
+      <div class="ctitle">Monthly increment</div>
+      <p class="cnote">How much progress landed each individual month — good for spotting stalled months.</p>
+      <div class="chartbox"><canvas id="c2"></canvas></div>
+    </div>
+
+    <div class="card">
+      <div class="tag">03 · Area</div>
+      <div class="ctitle">Filled cumulative area</div>
+      <p class="cnote">Same trend as #1, weighted visually — reads well as a single hero chart.</p>
+      <div class="chartbox"><canvas id="c3"></canvas></div>
+    </div>
+
+    <div class="card">
+      <div class="tag">04 · Donut</div>
+      <div class="ctitle">Current vs. remaining share</div>
+      <p class="cnote">Simplest "how much is left" read — good for a summary slide.</p>
+      <div class="chartbox"><canvas id="c4"></canvas></div>
+    </div>
+
+    <div class="card">
+      <div class="tag">05 · Gauge</div>
+      <div class="ctitle">Progress dial</div>
+      <p class="cnote">A single at-a-glance dial — reads instantly across a room.</p>
+      <div class="gaugewrap">
+        <canvas id="c5" style="max-width:220px;"></canvas>
+        <div class="gaugenum"><b>10.7%</b><span>COMPLETE</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="tag">06 · Waterfall</div>
+      <div class="ctitle">Month-by-month build-up</div>
+      <p class="cnote">Each floating bar is that month's contribution to the running total — shows exactly where the gain came from.</p>
+      <div class="chartbox"><canvas id="c6"></canvas></div>
+    </div>
+
+    <div class="card">
+      <div class="tag">07 · Tape ruler</div>
+      <div class="ctitle">Opening vs. current, on a 0–100 scale</div>
+      <p class="cnote">A single measured bar — the format used in the full-project dashboard.</p>
+      <div class="ruler">
+        <div class="fo" style="width:3.31%"></div>
+        <div class="fc" style="width:10.696%"></div>
+        <div class="mk" style="left:3.31%"></div>
+      </div>
+      <div class="rulerlabels"><span>0%</span><span>Opening 3.3%</span><span>Now 10.7%</span><span>100%</span></div>
+    </div>
+
+    <div class="card">
+      <div class="tag">08 · Sparkline</div>
+      <div class="ctitle">Minimal inline trend</div>
+      <p class="cnote">No axes, no labels — drops straight into a table row or a one-line status report.</p>
+      <div class="chartbox" style="min-height:110px;"><canvas id="c8"></canvas></div>
+    </div>
+
+    <div class="card">
+      <div class="tag">09 · Polar / clock</div>
+      <div class="ctitle">Monthly increment around the year</div>
+      <p class="cnote">Months arranged like a clock face — spoke length is that month's gain. Unusual, but memorable in a review deck.</p>
+      <div class="chartbox"><canvas id="c9"></canvas></div>
+    </div>
+
+    <div class="card">
+      <div class="tag">10 · Stacked bar</div>
+      <div class="ctitle">Composition of the current total</div>
+      <p class="cnote">One bar split into "brought forward" and "gained this year," with the gap to 100% shown as unfilled track.</p>
+      <div class="stackbar">
+        <div style="width:3.31%; background:#5B8FE1;"></div>
+        <div style="width:7.386%; background:#F2A93B;"></div>
+        <div style="width:89.304%; background:var(--panel-2);"></div>
+      </div>
+      <div class="stacklegend">
+        <span><i class="sw" style="background:#5B8FE1"></i>Opening 3.3%</span>
+        <span><i class="sw" style="background:#F2A93B"></i>Gained this FY 7.4%</span>
+        <span><i class="sw" style="background:var(--panel-2); border:1px solid var(--line);"></i>Remaining 89.3%</span>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <span>Data: Contract Package 8A, Sheet1 — opening 3.3%, FY increments Jul–Jun, closing 10.7%</span>
+    <span>Corrected data · figures in % physical progress</span>
+  </footer>
+</div>
+
+<script>
+const monthsShort = ['Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun'];
+const inc = [0.0, 0.08, 0.84, 0.08, 0.9, 0.79, 0.84, 0.83, 0.56, 0.97, 0.19, 1.306];
+const cum = [3.31, 3.39, 4.23, 4.31, 5.21, 6.0, 6.84, 7.67, 8.23, 9.2, 9.39, 10.696];
+const opening = 3.31, current = 10.696, remaining = 89.304;
+
+Chart.register(ChartDataLabels);
+Chart.defaults.color = '#7E93A3';
+Chart.defaults.font.family = "'IBM Plex Mono', monospace";
+Chart.defaults.font.size = 10;
+const gridColor = '#1C2C39';
+const amber = '#F2A93B', teal='#5BC9AF', red='#E1655A', blue='#5B8FE1';
+const labelFont = { family:"'IBM Plex Mono', monospace", size:9, weight:'600' };
+
+const yMin = 0, yMax = 15;
+
+// 1. Line - cumulative
+new Chart(c1,{type:'line',data:{labels:monthsShort,datasets:[{data:cum,borderColor:amber,backgroundColor:'transparent',pointRadius:3,pointBackgroundColor:amber,tension:.3,borderWidth:2}]},
+  options:{plugins:{legend:{display:false},datalabels:{color:'#E9F0F5',font:labelFont,anchor:'end',align:'top',formatter:v=>v.toFixed(1)}},scales:{x:{grid:{color:gridColor}},y:{grid:{color:gridColor},min:yMin,max:yMax}},layout:{padding:{top:14}}}});
+
+// 2. Bar - monthly increment
+new Chart(c2,{type:'bar',data:{labels:monthsShort,datasets:[{data:inc,backgroundColor:inc.map(v=>v===Math.max(...inc)?teal:'#3E5568'),borderRadius:2}]},
+  options:{plugins:{legend:{display:false},datalabels:{color:'#E9F0F5',font:labelFont,anchor:'end',align:'top',formatter:v=>v.toFixed(2)}},scales:{x:{grid:{display:false}},y:{grid:{color:gridColor}}},layout:{padding:{top:14}}}});
+
+// 3. Area - cumulative filled
+new Chart(c3,{type:'line',data:{labels:monthsShort,datasets:[{data:cum,borderColor:teal,backgroundColor:'rgba(91,201,175,.18)',fill:true,tension:.3,pointRadius:2,pointBackgroundColor:teal,borderWidth:2}]},
+  options:{plugins:{legend:{display:false},datalabels:{color:'#E9F0F5',font:labelFont,anchor:'end',align:'top',formatter:v=>v.toFixed(1)}},scales:{x:{grid:{color:gridColor}},y:{grid:{color:gridColor},min:0,max:100}},layout:{padding:{top:14}}}});
+
+// 4. Donut
+new Chart(c4,{type:'doughnut',data:{labels:['Current','Remaining'],datasets:[{data:[current,remaining],backgroundColor:[amber,'#22323F'],borderColor:'#111E29',borderWidth:3}]},
+  options:{plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:10}}},datalabels:{color:['#0B141D','#7E93A3'],font:{family:"'IBM Plex Mono', monospace",size:11,weight:'700'},formatter:v=>v.toFixed(1)+'%'}},cutout:'68%'}});
+
+// 5. Gauge (half doughnut)
+new Chart(c5,{type:'doughnut',data:{datasets:[{data:[current,100-current],backgroundColor:[amber,'#22323F'],borderWidth:0}]},
+  options:{rotation:-90,circumference:180,cutout:'75%',plugins:{legend:{display:false},tooltip:{enabled:false},datalabels:{display:false}}}});
+
+// 6. Waterfall via floating bars
+const waterfallData = [];
+let prev = opening;
+waterfallData.push({x:'Open',y:[0,opening]});
+monthsShort.forEach((m,i)=>{
+  const next = prev + inc[i];
+  waterfallData.push({x:m, y:[Math.min(prev,next),Math.max(prev,next)]});
+  prev = next;
+});
+new Chart(c6,{type:'bar',
+  data:{labels:waterfallData.map(d=>d.x),
+    datasets:[{data:waterfallData.map(d=>d.y),
+      backgroundColor: waterfallData.map((d,i)=> i===0? blue : (inc[i-1]>0? teal:'#3E5568')),
+      borderRadius:2, barPercentage:0.7}]},
+  options:{plugins:{legend:{display:false},datalabels:{color:'#E9F0F5',font:labelFont,anchor:'end',align:'top',
+    formatter:(v,ctx)=> ctx.dataIndex===0 ? opening.toFixed(1) : inc[ctx.dataIndex-1].toFixed(2)}},
+    scales:{x:{grid:{display:false},ticks:{maxRotation:0,autoSkip:false,font:{size:8}}},y:{grid:{color:gridColor},min:yMin,max:yMax}},layout:{padding:{top:14}}}});
+
+// 8. Sparkline
+new Chart(c8,{type:'line',data:{labels:monthsShort,datasets:[{data:inc,borderColor:amber,backgroundColor:'transparent',pointRadius:2,pointBackgroundColor:amber,tension:.4,borderWidth:2}]},
+  options:{plugins:{legend:{display:false},datalabels:{color:'#E9F0F5',font:{family:"'IBM Plex Mono', monospace",size:8},anchor:'end',align:'top',formatter:v=>v.toFixed(2)}},scales:{x:{display:false},y:{display:false}},elements:{line:{borderJoinStyle:'round'}},layout:{padding:{top:14,bottom:4}}}});
+
+// 9. Polar area
+new Chart(c9,{type:'polarArea',data:{labels:monthsShort,datasets:[{data:inc.map(v=>v+0.05),
+  backgroundColor:inc.map((v,i)=> `rgba(242,169,59,${0.25+0.6*(v/Math.max(...inc))})`)}]},
+  options:{plugins:{legend:{display:false},datalabels:{color:'#E9F0F5',font:labelFont,formatter:(v,ctx)=>inc[ctx.dataIndex].toFixed(2)}},scales:{r:{grid:{color:gridColor},ticks:{display:false}}}}});
+</script>
+</body>
+</html>
